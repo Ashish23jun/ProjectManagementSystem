@@ -2,6 +2,7 @@ package com.ashley.projectmanagementsystem.controller;
 
 import com.ashley.projectmanagementsystem.Model.Project;
 import com.ashley.projectmanagementsystem.Model.User;
+import com.ashley.projectmanagementsystem.response.MessageResponse;
 import com.ashley.projectmanagementsystem.service.ProjectService;
 import com.ashley.projectmanagementsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,17 @@ public class ProjectController {
         User user = userService.findUserProfileByJwt(jwt);
         Project updateProject = projectService.updateProject(project, projectId);
         return new ResponseEntity<>(updateProject, HttpStatus.OK);
+
+    }
+    @DeleteMapping("/{projectId}")
+    public ResponseEntity<MessageResponse>deleteProject(
+            @PathVariable Long projectId,
+            @RequestParam("Authorization") String jwt,
+            @RequestBody Project project) throws Exception {
+        User user = userService.findUserProfileByJwt(jwt);
+        projectService.deleteProject(projectId, user.getId());
+        MessageResponse res= new MessageResponse("Project deleted successfully");
+        return new ResponseEntity<>(res, HttpStatus.OK);
 
     }
 
