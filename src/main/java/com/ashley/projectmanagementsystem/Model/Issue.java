@@ -32,7 +32,7 @@ public class Issue {
     private LocalDate dueDate;
 
 
-    private List<String >tags= new ArrayList<>()
+    private List<String >tags= new ArrayList<>();
 
 
     @ManyToOne
