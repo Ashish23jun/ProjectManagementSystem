@@ -30,7 +30,10 @@ import java.util.List;
 public class AppConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.sessionManagement(Management -> Management.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).authorizeRequests(Authorize -> Authorize.requestMatchers("/api/**").authenticated().anyRequest().permitAll()).addFilterBefore(new JwtTokenValidator(), BasicAuthenticationFilter.class).csrf(csrf -> csrf.disable()).cors(cors -> cors.configurationSource(corsConfigurationSource()));
+        http.sessionManagement(Management -> Management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeRequests(Authorize -> Authorize.requestMatchers("/api/**").authenticated().anyRequest().permitAll())
+                .addFilterBefore(new JwtTokenValidator(), BasicAuthenticationFilter.class).csrf(csrf -> csrf.disable())
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()));
         return http.build();
 
     }

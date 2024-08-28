@@ -31,6 +31,7 @@ public class ProjectController {
         User user = userService.findUserProfileByJwt(jwt);
         List<Project> projects = projectService.getProjectByTeam(user, category, tag);
         return new ResponseEntity<>(projects, HttpStatus.OK);
+
     }
 
     @GetMapping("/{projectId}")
@@ -40,6 +41,7 @@ public class ProjectController {
         User user = userService.findUserProfileByJwt(jwt);
         Project project = projectService.getProjectById(projectId);
         return new ResponseEntity<>(project, HttpStatus.OK);
+
     }
 
     public ResponseEntity<Project> createProject(
@@ -82,6 +84,7 @@ public class ProjectController {
         User user = userService.findUserProfileByJwt(jwt);
         List<Project> projects = projectService.searchProject(keyword, user);
         return new ResponseEntity<>(projects, HttpStatus.OK);
+
     }
 
     @GetMapping("/{projectId}/chat")
