@@ -90,7 +90,8 @@ public class ProjectController {
     @GetMapping("/{projectId}/chat")
     public ResponseEntity<Chat> getChatByProjectId(
             @PathVariable Long projectId,
-            @RequestHeader("Authorization") String jwt) throws Exception {
+            @RequestHeader("Authorization") String jwt
+    ) throws Exception {
         User user = userService.findUserProfileByJwt(jwt);
         Chat chat = projectService.getChatByProjectId(projectId);
         return new ResponseEntity<>(chat, HttpStatus.OK);
