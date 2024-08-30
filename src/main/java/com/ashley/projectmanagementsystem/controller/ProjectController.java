@@ -104,6 +104,7 @@ public class ProjectController {
         Chat chat = projectService.getChatByProjectId(projectId);
         return new ResponseEntity<>(chat, HttpStatus.OK);
     }
+
     @PostMapping("/invite")
     public ResponseEntity<MessageResponse> inviteProject(
             @RequestBody InviteRequest req,
@@ -116,6 +117,7 @@ public class ProjectController {
         return new ResponseEntity<>(res, HttpStatus.OK);
 
     }
+
     @GetMapping("/accept_invitation")
     public ResponseEntity<Invitation> inviteProject(
             @RequestParam String token,
