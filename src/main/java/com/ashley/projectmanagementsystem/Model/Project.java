@@ -1,6 +1,5 @@
 package com.ashley.projectmanagementsystem.Model;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -20,20 +19,21 @@ public class Project {
     private Long id;
     private String name;
     private String description;
-    private String Category;
+    private String category;
 
-    private List<String> tags= new ArrayList<>();
+    @ElementCollection
+    private List<String> tags = new ArrayList<>();
 
     @JsonIgnore
-    @OneToOne(mappedBy = "project",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToOne(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     private Chat chat;
 
     @ManyToOne
     private User owner;
 
-    @OneToMany(mappedBy = "project",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<Issue>issues= new ArrayList<>();
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Issue> issues = new ArrayList<>();
 
     @ManyToMany
-    private List<User>team= new ArrayList<>();
+    private List<User> team = new ArrayList<>();
 }
