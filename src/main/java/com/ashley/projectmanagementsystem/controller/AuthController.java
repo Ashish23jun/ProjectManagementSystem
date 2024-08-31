@@ -33,9 +33,6 @@ public class AuthController {
     @Autowired
     private CustomUserDetailsImpl customUserDetails;
 
-    @Autowired
-    private JwtProvider jwtProvider;
-
     @PostMapping("/signup")
     public ResponseEntity<AuthResponse> createUserHandler(@RequestBody User user) throws Exception {
         User isUserExist = userRepository.findByEmail(user.getEmail());
@@ -50,7 +47,7 @@ public class AuthController {
         User savedUser = userRepository.save(createdUser);
         Authentication authentication = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtProvider.generateToken(authentication);
+        String jwt = JwtProvider.generateToken(authentication);
         AuthResponse res = new AuthResponse();
         res.setMessage("User created successfully");
         res.setJwt(jwt);
@@ -66,7 +63,7 @@ public class AuthController {
         Authentication authentication = authenticate(username, password);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        String jwt = jwtProvider.generateToken(authentication);
+        String jwt = JwtProvider.generateToken(authentication);
 
         AuthResponse res = new AuthResponse();
         res.setMessage("Signing Successfully");

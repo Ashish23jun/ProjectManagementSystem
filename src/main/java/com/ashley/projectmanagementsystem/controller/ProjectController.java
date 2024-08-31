@@ -98,8 +98,7 @@ public class ProjectController {
     @GetMapping("/{projectId}/chat")
     public ResponseEntity<Chat> getChatByProjectId(
             @PathVariable Long projectId,
-            @RequestHeader("Authorization") String jwt
-    ) throws Exception {
+            @RequestHeader("Authorization") String jwt) throws Exception {
         User user = userService.findUserProfileByJwt(jwt);
         Chat chat = projectService.getChatByProjectId(projectId);
         return new ResponseEntity<>(chat, HttpStatus.OK);
@@ -109,8 +108,7 @@ public class ProjectController {
     public ResponseEntity<MessageResponse> inviteProject(
             @RequestBody InviteRequest req,
             @RequestHeader("Authorization") String jwt,
-            @RequestBody Project project
-    ) throws Exception {
+            @RequestBody Project project) throws Exception {
         User user = userService.findUserProfileByJwt(jwt);
         invitationService.sendInvitation(req.getEmail(), req.getProjectId());
         MessageResponse res = new MessageResponse("Invitation sent successfully");
@@ -122,10 +120,9 @@ public class ProjectController {
     public ResponseEntity<Invitation> inviteProject(
             @RequestParam String token,
             @RequestHeader("Authorization") String jwt,
-            @RequestBody Project project
-    ) throws Exception {
+            @RequestBody Project project) throws Exception {
         User user = userService.findUserProfileByJwt(jwt);
-        Invitation invitation=invitationService.acceptInvitation(token, user.getId());
+        Invitation invitation = invitationService.acceptInvitation(token, user.getId());
         projectService.addUserToProject(invitation.getProjectId(), invitation.getProjectId());
         return new ResponseEntity<>(invitation, HttpStatus.ACCEPTED);
 
