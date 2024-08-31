@@ -3,7 +3,6 @@
 //It has a ManyToOne relationship with the User class to store the user to whom the issue is assigned.
 //It has a primary key id to uniquely identify the issue.
 
-
 package com.ashley.projectmanagementsystem.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -24,7 +23,7 @@ public class Issue {
     private String title;
     private String description;
     private String status;
-
+    private Long projectId;
     private String priority;
     private LocalDate dueDate;
 

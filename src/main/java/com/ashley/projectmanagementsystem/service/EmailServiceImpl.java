@@ -3,7 +3,6 @@ package com.ashley.projectmanagementsystem.service;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailException;
 import org.springframework.mail.MailSendException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -19,17 +18,17 @@ public class EmailServiceImpl implements EmailService {
     public void sendEmailWithToken(String userEmail, String link) throws MessagingException {
         // send email with token
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage,"utf-8");
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
         String subject = "Join Project Team Innovation";
-        String text="Click the link below to join the project team: " + link;
+        String text = "Click the link below to join the project team: " + link;
 
         helper.setSubject(subject);
         helper.setText(text, true);
         helper.setTo(userEmail);
 
-        try{
+        try {
             javaMailSender.send(mimeMessage);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new MailSendException("Failed to send email");
 
         }
