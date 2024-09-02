@@ -9,7 +9,6 @@ import com.ashley.projectmanagementsystem.response.MessageResponse;
 import com.ashley.projectmanagementsystem.service.InvitationService;
 import com.ashley.projectmanagementsystem.service.ProjectService;
 import com.ashley.projectmanagementsystem.service.UserService;
-import org.antlr.v4.runtime.Token;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,7 +44,7 @@ public class ProjectController {
     public ResponseEntity<Project> getProjectById(
             @PathVariable Long projectId,
             @RequestHeader("Authorization") String jwt) throws Exception {
-        User user = userService.findUserProfileByJwt(jwt);
+        // User user = userService.findUserProfileByJwt(jwt);
         Project project = projectService.getProjectById(projectId);
         return new ResponseEntity<>(project, HttpStatus.OK);
 
@@ -62,12 +61,12 @@ public class ProjectController {
 
     }
 
-    @PostMapping("/{projectId}")
+    @PatchMapping("/{projectId}")
     public ResponseEntity<Project> updateProject(
             @PathVariable Long projectId,
             @RequestHeader("Authorization") String jwt,
             @RequestBody Project project) throws Exception {
-        User user = userService.findUserProfileByJwt(jwt);
+        // User user = userService.findUserProfileByJwt(jwt);
         Project updateProject = projectService.updateProject(project, projectId);
         return new ResponseEntity<>(updateProject, HttpStatus.OK);
 
@@ -99,7 +98,7 @@ public class ProjectController {
     public ResponseEntity<Chat> getChatByProjectId(
             @PathVariable Long projectId,
             @RequestHeader("Authorization") String jwt) throws Exception {
-        User user = userService.findUserProfileByJwt(jwt);
+        // User user = userService.findUserProfileByJwt(jwt);
         Chat chat = projectService.getChatByProjectId(projectId);
         return new ResponseEntity<>(chat, HttpStatus.OK);
     }
@@ -109,7 +108,7 @@ public class ProjectController {
             @RequestBody InviteRequest req,
             @RequestHeader("Authorization") String jwt,
             @RequestBody Project project) throws Exception {
-        User user = userService.findUserProfileByJwt(jwt);
+        // User user = userService.findUserProfileByJwt(jwt);
         invitationService.sendInvitation(req.getEmail(), req.getProjectId());
         MessageResponse res = new MessageResponse("Invitation sent successfully");
         return new ResponseEntity<>(res, HttpStatus.OK);
