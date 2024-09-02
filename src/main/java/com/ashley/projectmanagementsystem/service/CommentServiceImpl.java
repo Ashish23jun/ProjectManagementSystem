@@ -70,7 +70,7 @@ public class CommentServiceImpl implements CommentService {
 
         }
         Comment comment = optionalComment.get();
-        User user = userOptional.get();
+        // User user = userOptional.get();
 
         if (comment.getUser().equals(comment)) {
             commentRepository.delete(comment);

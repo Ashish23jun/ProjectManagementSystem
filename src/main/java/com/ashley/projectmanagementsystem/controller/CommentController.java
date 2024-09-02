@@ -3,7 +3,6 @@ package com.ashley.projectmanagementsystem.controller;
 import com.ashley.projectmanagementsystem.Model.Comment;
 import com.ashley.projectmanagementsystem.Model.User;
 import com.ashley.projectmanagementsystem.request.CreateCommentRequest;
-import com.ashley.projectmanagementsystem.response.MessageResponse;
 import com.ashley.projectmanagementsystem.service.CommentService;
 import com.ashley.projectmanagementsystem.service.UserService;
 
@@ -24,7 +23,6 @@ public class CommentController {
     @Autowired
     private UserService userService;
 
-    // write CommentController constructor
     public CommentController(CommentService commentService, UserService userService) {
         this.commentService = commentService;
         this.userService = userService;
